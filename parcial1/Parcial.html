@@ -12,24 +12,34 @@
     <p>Vector para la transformacion => <!-- Parrafo -->
         <label for="p1">p1</label> <!-- Se piden datos al usuario -->
         <input type="text" id="p1"> <!-- Se guardan datos del usuario -->
-        <label for="p2">p2</label> <!-- Se piden datos al usuario -->
+        <label for="p2">, p2</label> <!-- Se piden datos al usuario -->
         <input type="text" id="p2"> <!-- Se guardan datos del usuario -->
     </p>
+
     <p>
         <label for="TI">Transformacion inicial:</label> <!-- Se piden datos al usuario -->
         <input type="text" id="TI"> <!-- Se guardan datos del usuario -->
 
     </p>
+
     <p>
-        <label for="TF">Transformacion final: </label> <!-- Se piden datos al usuario -->
+        <label for="TF">Transformacion final:</label> <!-- Se piden datos al usuario -->
         <input type="text" id="TF"> <!-- Se guardan datos del usuario -->
     </p>
 
-    <button onclick="resultadoT1()">Procesar</button> <!-- Boton para ejecutar funcion -->
+    <button onclick="rotacion(),escala(),traslacion()">Procesar</button> <!-- Boton para ejecutar funcion -->
 
+    <!-- Se llaman a los resultados -->
     <p id="resultadoT1"></p>
-    <p id="resultadoR"></p>
-    <p id="resultadoE"></p>
+    <p id="resultadoT2"></p>
+    <p id="resultadoR1"></p>
+    <p id="resultadoR2"></p>
+    <p id="resultadoE1"></p>
+    <p id="resultadoE2"></p>
+
+    <p>
+        x1,y1,z1 y x2, y2, z2 corresponden a los valores de coordenadas del vector transformado
+    </p>
 
 </body>
 
@@ -62,7 +72,9 @@
             p2_coordenada[2] + TF_coordenada[2]
         ];
 
-        document.getElementById("resultadoT1").innerHTML = "Vector resultado => p1'=[" + resultadoT1.join(",") + "]";
+        // Para mostrar respuesta
+        document.getElementById("resultadoT1", "resultadoT2").innerHTML = "Vector resultado T => p1'=[" + resultadoT1.join(",") + "]";
+        document.getElementById("resultadoT2").innerHTML = "Vector resultado T => p2'=[" + resultadoT2.join(",") + "]";
     }
 
     function rotacion() { // Funcion de rotacion
@@ -79,11 +91,22 @@
         var TI_coordenada = TI.split(",").map(parseFloat);
         var TF_coordenada = TF.split(",").map(parseFloat);
 
-        var resultadoR = [
-            p1_coordenada[0] * Math.cos(TI_coordenada[0]) - p1_coordenada[1] * Math.sin(TI_coordenada[1])
+        // Calcular 
+        var resultadoR1 = [
+            p1_coordenada[0] * Math.cos(TI_coordenada[0]) - p1_coordenada[1] * Math.sin(TI_coordenada[0]),
+            p1_coordenada[1] * Math.sin(TI_coordenada[1]) + p1_coordenada[1] * Math.cos(TI_coordenada[1]),
+            p1_coordenada[2]
         ];
 
-        document.getElementById("resultadoR").innerHTML = "Vector resultado => p1'=[" + resultadoR1.join(",") + "]";
+        var resultadoR2 = [
+            p2_coordenada[0] * Math.cos(TF_coordenada[0]) - p2_coordenada[1] * Math.sin(TF_coordenada[0]),
+            p2_coordenada[1] * Math.sin(TF_coordenada[1]) + p2_coordenada[1] * Math.cos(TF_coordenada[1]),
+            p2_coordenada[2]
+        ];
+
+        // Para mostrar respuesta
+        document.getElementById("resultadoR1").innerHTML = "Vector resultado R => p1'=[" + resultadoR1.join(",") + "]";
+        document.getElementById("resultadoR2").innerHTML = "Vector resultado R => p2'=[" + resultadoR2.join(",") + "]";
 
     }
 
@@ -102,11 +125,21 @@
         var TF_coordenada = TF.split(",").map(parseFloat);
 
         // Calcular 
-        var resultadoE = [
+        var resultadoE1 = [
             p1_coordenada[0] * TI_coordenada[0],
             p1_coordenada[1] * TI_coordenada[1],
             p1_coordenada[2] * TI_coordenada[2]
         ];
+
+        var resultadoE2 = [
+            p2_coordenada[0] * TF_coordenada[0],
+            p2_coordenada[1] * TF_coordenada[1],
+            p2_coordenada[2] * TF_coordenada[2]
+        ];
+
+        // Para mostrar respuesta
+        document.getElementById("resultadoE1").innerHTML = "Vector resultado E => p1'=[" + resultadoE1.join(",") + "]";
+        document.getElementById("resultadoE2").innerHTML = "Vector resultado E => p2'=[" + resultadoE2.join(",") + "]";
     }
 
 </script>
