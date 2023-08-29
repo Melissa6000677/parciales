@@ -7,69 +7,107 @@
 
 <body>
 
-    <h1>Transformaciones conjuntas</h1>
+    <h1>Transformaciones conjuntas</h1> <!-- Titulo -->
 
-    <p>Vector para la transformacion =>
-        <label for="p1"> p1 <input type="text" id="p1"></label>
-        <label for="p2"> p2 <input type="text" id="p2"></label>
+    <p>Vector para la transformacion => <!-- Parrafo -->
+        <label for="p1">p1</label> <!-- Se piden datos al usuario -->
+        <input type="text" id="p1"> <!-- Se guardan datos del usuario -->
+        <label for="p2">p2</label> <!-- Se piden datos al usuario -->
+        <input type="text" id="p2"> <!-- Se guardan datos del usuario -->
     </p>
-    <p><label for="TI">Transformacion inicial: <input type="text" id="TI"> </label></p>
-    <p><label for="TF">Transformacion final: <input type="text" id="TF"> </label></p>
-    <button onclick="resultadoT1()">Procesar</button>
+    <p>
+        <label for="TI">Transformacion inicial:</label> <!-- Se piden datos al usuario -->
+        <input type="text" id="TI"> <!-- Se guardan datos del usuario -->
+
+    </p>
+    <p>
+        <label for="TF">Transformacion final: </label> <!-- Se piden datos al usuario -->
+        <input type="text" id="TF"> <!-- Se guardan datos del usuario -->
+    </p>
+
+    <button onclick="resultadoT1()">Procesar</button> <!-- Boton para ejecutar funcion -->
+
     <p id="resultadoT1"></p>
+    <p id="resultadoR"></p>
+    <p id="resultadoE"></p>
 
 </body>
 
 <script>
-    function traslacion() {
+    function traslacion() { // Funcion de traslacion
 
+        // Obtener el valor guardado para usarlo en la funcion
         var p1 = document.getElementById("p1").value;
         var p2 = document.getElementById("p2").value;
         var TI = document.getElementById("TI").value;
         var TF = document.getElementById("TF").value;
 
+        // Convertir los valores de texto en flotantes
         var p1_coordenada = p1.split(",").map(parseFloat);
         var p2_coordenada = p2.split(",").map(parseFloat);
         var TI_coordenada = TI.split(",").map(parseFloat);
         var TF_coordenada = TF.split(",").map(parseFloat);
 
+        // Calcular 
         var resultadoT1 = [
             p1_coordenada[0] + TI_coordenada[0],
             p1_coordenada[1] + TI_coordenada[1],
             p1_coordenada[2] + TI_coordenada[2]
         ];
 
+        // Calcular 
         var resultadoT2 = [
             p2_coordenada[0] + TF_coordenada[0],
             p2_coordenada[1] + TF_coordenada[1],
             p2_coordenada[2] + TF_coordenada[2]
         ];
 
-        document.getElementById("resultadoT").innerHTML = "Vector resultado => p1'=[" + resultadoT1.join(",") + "]";
-        function rotacion() {
-            var p1 = document.getElementById("p1").value;
-            var p2 = document.getElementById("p2").value;
-            var angulo = parseFloat(document.getElementById("angulo").value);
-
-            var p1_coordenada = p1.split(",").map(parseFloat);
-            var p2_coordenada = p2.split(",").map(parseFloat);
-
-        }
+        document.getElementById("resultadoT1").innerHTML = "Vector resultado => p1'=[" + resultadoT1.join(",") + "]";
     }
-        function escala() {
-            var p1 = document.getElementById("p1").value;
-            var p2 = document.getElementById("p2").value;
 
-            var p1_coordenada = p1.split(",").map(parseFloat);
-            var p2_coordenada = p2.split(",").map(parseFloat);
+    function rotacion() { // Funcion de rotacion
 
-            var resultadoE = [
-                p1_coordenada[0] * p2_coordenada[0],
-                p1_coordenada[1] * p2_coordenada[1],
-                p1_coordenada[2] * p2_coordenada[2],
-            ];
+        // Obtener el valor guardado para usarlo en la funcion
+        var p1 = document.getElementById("p1").value;
+        var p2 = document.getElementById("p2").value;
+        var TI = document.getElementById("TI").value;
+        var TF = document.getElementById("TF").value;
 
-        }
+        // Convertir los valores de texto en flotantes
+        var p1_coordenada = p1.split(",").map(parseFloat);
+        var p2_coordenada = p2.split(",").map(parseFloat);
+        var TI_coordenada = TI.split(",").map(parseFloat);
+        var TF_coordenada = TF.split(",").map(parseFloat);
+
+        var resultadoR = [
+            p1_coordenada[0] * Math.cos(TI_coordenada[0]) - p1_coordenada[1] * Math.sin(TI_coordenada[1])
+        ];
+
+        document.getElementById("resultadoR").innerHTML = "Vector resultado => p1'=[" + resultadoR1.join(",") + "]";
+
+    }
+
+    function escala() { // Funcion de escala
+
+        // Obtener el valor guardado para usarlo en la funcion
+        var p1 = document.getElementById("p1").value;
+        var p2 = document.getElementById("p2").value;
+        var TI = document.getElementById("TI").value;
+        var TF = document.getElementById("TF").value;
+
+        // Convertir los valores de texto en flotantes
+        var p1_coordenada = p1.split(",").map(parseFloat);
+        var p2_coordenada = p2.split(",").map(parseFloat);
+        var TI_coordenada = TI.split(",").map(parseFloat);
+        var TF_coordenada = TF.split(",").map(parseFloat);
+
+        // Calcular 
+        var resultadoE = [
+            p1_coordenada[0] * TI_coordenada[0],
+            p1_coordenada[1] * TI_coordenada[1],
+            p1_coordenada[2] * TI_coordenada[2]
+        ];
+    }
 
 </script>
 
